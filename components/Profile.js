@@ -92,6 +92,7 @@ export default class Profile extends React.Component {
   };
 
   go_show_side_story = async index => {
+    console.log('show side')
     var title = this.state.texts[index];
     var username = this.state.username;
     this.props.navigation.navigate('Show_divide', {title, username});
@@ -132,12 +133,13 @@ export default class Profile extends React.Component {
     }
     let titles = Object.keys(title_list);
 
-    for (var k = 0; k < titles.length; k++) {
-      text.push(titles[k]);
-    }
+    // for (var k = 0; k < titles.length; k++) {
+     
+    // }
 
     let arr_2d_titles = [];
     for (var i = 0; i < titles.length; i++) {
+      text.push(titles[i]);
       arr_2d_titles[i] = title_list[titles[i]];
     }
 
@@ -152,9 +154,9 @@ export default class Profile extends React.Component {
       flag_l.push(arr_2d_titles[a][2]);
     }
 
-    console.log('images length:' + images.length);
-    console.log('text length:' + text.length);
-    console.log('flag_l length:' + flag_l.length);
+    // console.log('images length:' + images.length);
+    // console.log('text length:' + text.length);
+    // console.log('flag_l length:' + flag_l.length);
     no_stories=text.length
 
     var follower_list = await get_followers(this.state.username);
@@ -329,6 +331,8 @@ export default class Profile extends React.Component {
                               onPress={() => {
                                 if (this.state.flag_list[index] == 'cont') {
                                   this.go_show_cont_story(index);
+                                }else{
+                                  this.go_show_side_story(index);
                                 }
                                 //  this.forceUpdate();
                               }}>
@@ -470,3 +474,4 @@ const styles = StyleSheet.create({
     // ...elevationShadowStyle(20),
   },
 });
+

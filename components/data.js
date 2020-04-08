@@ -27,10 +27,10 @@ async function sign_up(info) {
   let result = checker.val();
 
   if (result === null) {
-    console.log('no existing user. ok!');
+    // console.log('no existing user. ok!');
   } else {
     alert('Username taken!');
-    console.log('user already exists...');
+    // console.log('user already exists...');
     return 0;
   }
 
@@ -47,7 +47,7 @@ async function sign_in(info) {
   let checker = await db.ref('users/' + info.username).once('value');
   let result = checker.val();
   if (result == null) {
-    console.log('no existing user!');
+    // console.log('no existing user!');
     alert('Username does not exist!');
     return 0;
   }
@@ -140,7 +140,7 @@ async function uploadImage(
   uri,
   mime = 'application/octet-stream',
 ) {
-  alert('Uploading Image!');
+  // alert('Uploading Image!');
   //image_uri: 'https://avatars0.githubusercontent.com/u/12028011?v=3&s=200';
   let latest_img_ind = await check_image_index(username, title, fl);
   latest_img_ind = latest_img_ind + 1;
@@ -175,11 +175,12 @@ async function uploadImage(
       })
       .then(url => {
         resolve(url);
-        alert('Image Added!');
+        // alert('Image Added!');
+        console.log('image added!')
         return url;
       })
       .catch(error => {
-        console.log('Error in uploading!');
+        // console.log('Error in uploading!');
         reject(error);
       });
   });
@@ -190,7 +191,7 @@ async function uploadImage_dp(
   uri,
   mime = 'application/octet-stream',
 ) {
-  alert('Uploading Image!');
+  // alert('Uploading Image!');
 
   return new Promise((resolve, reject) => {
     const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
@@ -213,7 +214,8 @@ async function uploadImage_dp(
       .then(async url => {
         resolve(url);
         let add_dp = await db.ref('DP_url/' + username).set(url);
-        alert('DP added');
+        // alert('DP added');
+        console.log('DP added')
         return url;
       })
       .catch(error => {
@@ -264,25 +266,19 @@ async function uploadAudio(
             )
             .set(url);
         }
-        alert('Audio upload Complete!');
+        // alert('Audio upload Complete!');
+        console.log('audio upload complete')
         resolve(url);
       })
       .catch(error => {
-        console.log('Error in uploading!');
+        // console.log('Error in uploading!');
         reject(error);
       });
   });
 }
 
 async function downloadaudio_side(audio_url, username, title) {
-  // let audio_check = await aud_exist(fl, username, title);
-  // let aud_url = '-1';
-  // if (audio_check == '0') {
-  //   aud_url = '0';
-  //   return aud_url;
-  // } else {
-  //   aud_url = audio_check;
-  // }
+  // console.log('url:'+audio_url)
   let task = RNBackgroundDownloader.download({
     id: 'fiyesle123',
     url: audio_url,
@@ -300,7 +296,8 @@ async function downloadaudio_side(audio_url, username, title) {
       console.log(`Downloaded: ${percent * 100}%`);
     })
     .done(() => {
-      alert('Download is done!');
+      // alert('Download is done!');
+      console.log('download is done!')
       return '1';
     })
     .error(error => {
@@ -335,7 +332,8 @@ async function downloadaudio(fl, username, title) {
       console.log(`Downloaded: ${percent * 100}%`);
     })
     .done(() => {
-      alert('Download is done!');
+      // alert('Download is done!');
+      console.log('download is done!')
       return '1';
     })
     .error(error => {
@@ -356,7 +354,7 @@ async function aud_exist(fl, username, title) {
       .once('value');
   }
   var last_aud_url = url_struct.val();
-  console.log('to be url:' + last_aud_url);
+  // console.log('to be url:' + last_aud_url);
   if (last_aud_url == null) {
     return '0';
   } else {
@@ -383,7 +381,7 @@ async function get_story1(username, title) {
 
 async function get_story_side(username, title) {
   var down_aud = await aud_exist('side', username, title);
-  console.log('down_aud:'+down_aud)
+  // console.log('down_aud:'+down_aud)
 
   var story_dict = await db
     .ref('Cont_Stories/' + username + '_' + title + '_side' + '/side_dict/')

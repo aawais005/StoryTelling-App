@@ -79,13 +79,12 @@ export default class Home extends React.Component {
   // };
 
   async go_other_profile() {
-    console.log(this.state.query);
-    console.log(this.state.my_username);
+    // console.log(this.state.query);
+    // console.log(this.state.my_username);
     if (this.state.query == this.state.my_username) {
       alert('The user has entered own username!');
       return;
     }
-
     var u_flag = await check_user(this.state.query);
     // console.log('yee');
     if (u_flag == '0') {
@@ -99,6 +98,21 @@ export default class Home extends React.Component {
       });
     }
   }
+
+    go_show_cont_story = async index => {
+      var title = this.state.texts[index];
+      var username = this.state.username_list[index];
+      // var flag = this.state.flag_list[index];
+      this.props.navigation.navigate("Show_cont_story", { title, username });
+    };
+
+    go_show_side_story = async index => {
+      // console.log("show side");
+      var title = this.state.texts[index];
+      var username = this.state.my_username;
+      this.props.navigation.navigate("Show_divide", { title, username });
+    };
+  
 
   async componentDidMount() {
     var text = [];
@@ -115,11 +129,11 @@ export default class Home extends React.Component {
     }
     let users = Object.keys(user_list);
 
-    console.log(users);
+    // console.log(users);
 
     //remove my own username
     const index = users.indexOf(this.state.my_username);
-    console.log(this.state.my_username);
+    // console.log(this.state.my_username);
     if (index > -1) {
       // console.log('yes');
       users.splice(index, 1);
@@ -164,11 +178,11 @@ export default class Home extends React.Component {
       }
     }
 
-    console.log('images length:' + images.length);
-    console.log('text length:' + text.length);
-    console.log('username length:' + username_l.length);
-    // console.log('html_l length:' + html_l.length);
-    console.log('flag_l length:' + flag_l.length);
+    // console.log('images length:' + images.length);
+    // console.log('text length:' + text.length);
+    // console.log('username length:' + username_l.length);
+    // // console.log('html_l length:' + html_l.length);
+    // console.log('flag_l length:' + flag_l.length);
     // flg = 1;
     // setTimeout( ()=> {
     this.setState({
@@ -230,6 +244,8 @@ export default class Home extends React.Component {
                               onPress={() => {
                                 if (this.state.flag_list[index] == 'cont') {
                                   this.go_show_cont_story(index);
+                                }else{
+                                  this.go_show_side_story(index);
                                 }
                                 //  this.forceUpdate();
                               }}>
