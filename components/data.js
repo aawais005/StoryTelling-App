@@ -2,7 +2,7 @@ import {db, stor} from '../src/config';
 
 import {home_username} from './Home';
 
-import {story_title} from './Take_title';
+// import {story_title} from './Take_title';
 
 import RNfetchBlob from 'react-native-fetch-blob';
 
