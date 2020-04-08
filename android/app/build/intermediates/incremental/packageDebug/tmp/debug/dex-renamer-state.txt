@@ -1,0 +1,4 @@
+#Sat Apr 04 18:08:31 PKT 2020
+base.0=/home/awais/Documents/4_4_20/android/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex
