@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import RNFS from 'react-native-fs';
-import Accordian from './Accordian.js';
-import {Colors} from './Colors';
-const dic_json = require('./ansj.json');
+import React, { Component } from "react";
+import RNFS from "react-native-fs";
+import Accordian from "./Accordian.js";
+import { Colors } from "./Colors";
+const dic_json = require("./ansj.json");
 
 // var output_diction = '';
 import {
@@ -14,8 +14,8 @@ import {
   TextInput,
   TouchableHighlight,
   View,
-  ScrollView,
-} from 'react-native';
+  ScrollView
+} from "react-native";
 
 // var fs = require('react-native-fs');
 export default class syno extends Component {
@@ -23,10 +23,10 @@ export default class syno extends Component {
     super();
     global.list = {};
     this.state = {
-      dic_html: '',
-      func_html: '',
+      dic_html: "",
+      func_html: "",
       list_info: [],
-      replaced_html: '',
+      replaced_html: "",
       menu: [
         // {
         //   title: 'Non Veg Biryanis',
@@ -36,23 +36,23 @@ export default class syno extends Component {
         //   ],
         //   sentences: ['bro', 'vor sjs'],
         // },
-      ],
+      ]
     };
   }
   async componentDidMount() {
     this.setState({
-      func_html: this.state.dic_html,
+      func_html: this.state.dic_html
     });
     this.myfunc();
   }
 
   readFile = async MyPath => {
     try {
-      const path = MyPath + '/ans.txt';
-      const contents = await RNFS.readFile(path, 'utf8');
-      return '' + contents;
+      const path = MyPath + "/ans.txt";
+      const contents = await RNFS.readFile(path, "utf8");
+      return "" + contents;
     } catch (e) {
-      alert('' + e);
+      alert("" + e);
     }
   };
 
@@ -94,7 +94,7 @@ export default class syno extends Component {
     // new_html = ``;
     for (var i = 0; i < diction_dob.length; i++) {
       var orig_word = diction_dob[i][0];
-      var reg_rep = new RegExp(orig_word, 'g');
+      var reg_rep = new RegExp(orig_word, "g");
       temp_html = temp_html.replace(reg_rep, diction_dob[i][1][0]);
     }
     // console.log(temp_html);
@@ -105,7 +105,7 @@ export default class syno extends Component {
     var temp_html = story_html;
     for (var i = 0; i < diction_dob.length; i++) {
       var orig_word = diction_dob[i][0];
-      var reg_rep = new RegExp(orig_word, 'g');
+      var reg_rep = new RegExp(orig_word, "g");
       temp_html = temp_html.replace(reg_rep, diction_dob[i][1]);
     }
     // console.log(temp_html);
@@ -117,8 +117,8 @@ export default class syno extends Component {
     // new_html = ``;
     for (var i = 0; i < diction_single.length; i++) {
       var orig_word = diction_single[i][0];
-      if (orig_word.length > 2 && orig_word != 'میں' && orig_word != 'بھی') {
-        var reg_rep = new RegExp(orig_word, 'g');
+      if (orig_word.length > 2 && orig_word != "میں" && orig_word != "بھی") {
+        var reg_rep = new RegExp(orig_word, "g");
         temp_html = temp_html.replace(reg_rep, diction_single[i][2][0]);
       }
     }
@@ -127,13 +127,13 @@ export default class syno extends Component {
   }
 
   make_plain_text(html) {
-    let plain_text = html.replace(/<[^>]+>/g, '');
+    let plain_text = html.replace(/<[^>]+>/g, "");
     return plain_text;
   }
 
   text_split_words(my_plain_text) {
     var split_words_list = my_plain_text.split(
-      /[ ،۔\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-.\/:;<=>?@\[\]^_`{|}~]/,
+      /[ ،۔\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-.\/:;<=>?@\[\]^_`{|}~]/
     );
     return split_words_list;
   }
@@ -150,9 +150,9 @@ export default class syno extends Component {
     var double_word_list = [];
     for (var i = 0; i < list_of_words.length; i++) {
       double_word_list.push([
-        list_of_words[i] + ' ' + list_of_words[i + 1],
+        list_of_words[i] + " " + list_of_words[i + 1],
         i,
-        i + 1,
+        i + 1
       ]);
     }
     double_word_list.splice(list_words_final.length - 1, 1);
@@ -167,7 +167,7 @@ export default class syno extends Component {
       if (mean_i != undefined) {
         diction.push([
           word_list[i][0],
-          mean_i,
+          mean_i
           // i
         ]);
       }
@@ -178,14 +178,14 @@ export default class syno extends Component {
   give_start_end_dot(word_index, plain_or_html, html_len) {
     var start_dot = word_index;
     var a = plain_or_html[start_dot];
-    while (a != '.' && a != '۔' && start_dot >= 0) {
+    while (a != "." && a != "۔" && start_dot >= 0) {
       start_dot = start_dot - 1;
       a = plain_or_html[start_dot];
     }
 
     var end_dot = word_index + html_len;
     a = plain_or_html[end_dot];
-    while (a != '.' && a != '۔' && end_dot <= plain_or_html.length) {
+    while (a != "." && a != "۔" && end_dot <= plain_or_html.length) {
       end_dot = end_dot + 1;
       a = plain_or_html[end_dot];
     }
@@ -211,7 +211,7 @@ export default class syno extends Component {
   }
 
   grammar_word(urdu_word) {
-    var gr_list = ['میں', 'بھی'];
+    var gr_list = ["میں", "بھی"];
     if (gr_list.includes(urdu_word)) {
       // alert('yes');
       return 1;
@@ -224,19 +224,19 @@ export default class syno extends Component {
     var list_syno_dic = [];
     var temp_list_syno = list_synos;
     for (var z = 0; z < temp_list_syno.length; z++) {
-      var temp_syno_dic = {key: temp_list_syno[z], value: false};
+      var temp_syno_dic = { key: temp_list_syno[z], value: false };
       list_syno_dic.push(temp_syno_dic);
     }
     var temp_dict = {
       title: word,
       sentences: list_sentences,
-      data: list_syno_dic,
+      data: list_syno_dic
     };
     this.state.menu.push(temp_dict);
   }
 
   myfunc() {
-    console.log('-----');
+    console.log("-----");
     var story_html = ``;
     story_html = this.state.dic_html;
     let plainText = this.make_plain_text(story_html);
@@ -244,7 +244,7 @@ export default class syno extends Component {
     var text_split_final = this.copy_list_all_sing_words(text_split_temp);
     var text_split_final_d = this.make_double_word_list(
       text_split_temp,
-      text_split_final,
+      text_split_final
     );
     // fs.readFile('ans.txt', 'utf8', function read(err, data) {
     var result = dic_json;
@@ -255,7 +255,7 @@ export default class syno extends Component {
     diction = this.removeDuplicates(diction, 0);
 
     var forbidden_indexes = [];
-    var output_diction = '';
+    var output_diction = "";
     for (var i = 0; i < diction.length; i++) {
       // output_diction =
       //   output_diction +
@@ -278,7 +278,7 @@ export default class syno extends Component {
         var start_end_plain = this.give_start_end_dot(
           plain_indices[j],
           plainText,
-          diction[i][0].length,
+          diction[i][0].length
         );
         var start_dot = start_end_plain[0];
         var end_dot = start_end_plain[1];
@@ -302,7 +302,7 @@ export default class syno extends Component {
       var plain_indices_d = this.getIndicesOf(diction_s[d][0], plainText);
       var temp_plain_ind = this.double_word_index_rem(
         plain_indices_d,
-        forbidden_indexes,
+        forbidden_indexes
       );
       // temp_html_indices = [];
       diction_s_ind.push([diction_s[d][0], temp_plain_ind, diction_s[d][1]]);
@@ -330,7 +330,7 @@ export default class syno extends Component {
         var start_end_plain_sing = this.give_start_end_dot(
           diction_s_ind[z][1][n],
           plainText,
-          diction_s_ind[z][0].length,
+          diction_s_ind[z][0].length
         );
         var st_sen = start_end_plain_sing[0];
         var end_sen = start_end_plain_sing[1];
@@ -363,10 +363,16 @@ export default class syno extends Component {
   }
 
   render() {
-    this.state.dic_html = this.props.navigation.getParam('dic_html');
+    this.state.dic_html = this.props.navigation.getParam("dic_html");
     return (
       <View style={styles.container}>
-        <Button title="Done" onPress={this.go_to_rich} />
+        {/* <Button title="Done" onPress={this.go_to_rich} /> */}
+        <TouchableHighlight
+          style={[styles.buttonContainer, styles.loginButton]}
+          onPress={() => this.go_to_rich()}
+        >
+          <Text style={styles.loginText}> Replace</Text>
+        </TouchableHighlight>
         <ScrollView>{this.renderAccordians()}</ScrollView>
       </View>
     );
@@ -382,7 +388,7 @@ export default class syno extends Component {
           title={item.title}
           data={item.data}
           sentences={item.sentences}
-        />,
+        />
       );
     }
     return items;
@@ -401,11 +407,12 @@ export default class syno extends Component {
     // var html_to_send = this.richText.getContentHtml();
     this.state.replaced_html = this.rep_html(list_to_send, html_to_send);
     // alert(this.state.replaced_html);
-
-    this.props.navigation.navigate('Rich', {
+    var draw_check = 0;
+    this.props.navigation.navigate("Rich", {
       // list_synonyms: global.list,
       syno_check: 1,
       replaced_html: this.state.replaced_html,
+      draw_check: draw_check
     });
   };
 }
@@ -413,7 +420,24 @@ export default class syno extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 100,
-    backgroundColor: Colors.PRIMARY,
+    // paddingTop: 0,
+    backgroundColor: "white"
+  },
+  buttonContainer: {
+    height: 45,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 10,
+    width: 360,
+    borderRadius: 30
+  },
+  loginButton: {
+    backgroundColor: "#ff8000"
+  },
+  loginText: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: 'black',
   },
 });

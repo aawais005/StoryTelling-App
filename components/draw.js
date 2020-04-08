@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {View, Text, TouchableHighlight} from 'react-native';
-import SketchDraw from 'react-native-sketch-draw';
+import React, { Component } from "react";
+import { View, Text, TouchableHighlight } from "react-native";
+import SketchDraw from "react-native-sketch-draw";
 
-import RNfetchBlob from 'react-native-fetch-blob';
+import RNfetchBlob from "react-native-fetch-blob";
 
-import {uploadImage} from './data';
+import { uploadImage } from "./data";
 const fs = RNfetchBlob.fs;
 const SketchDrawConstants = SketchDraw.constants;
 
@@ -14,24 +14,24 @@ const tools = {};
 tools[SketchDrawConstants.toolType.pen.id] = {
   id: SketchDrawConstants.toolType.pen.id,
   name: SketchDrawConstants.toolType.pen.name,
-  nextId: SketchDrawConstants.toolType.eraser.id,
+  nextId: SketchDrawConstants.toolType.eraser.id
 };
 tools[SketchDrawConstants.toolType.eraser.id] = {
   id: SketchDrawConstants.toolType.eraser.id,
   name: SketchDrawConstants.toolType.eraser.name,
-  nextId: SketchDrawConstants.toolType.pen.id,
+  nextId: SketchDrawConstants.toolType.pen.id
 };
 
 export default class DrawBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      color: '#FFFFFF',
+      color: "#FFFFFF",
       toolSelected: SketchDrawConstants.toolType.pen.id,
-      glob_url: '',
+      glob_url: "",
       draw_check: 0,
-      username: '',
-      title: '',
+      username: "",
+      title: ""
     };
   }
 
@@ -40,7 +40,7 @@ export default class DrawBoard extends Component {
   }
 
   toolChangeClick() {
-    this.setState({toolSelected: tools[this.state.toolSelected].nextId});
+    this.setState({ toolSelected: tools[this.state.toolSelected].nextId });
   }
 
   getToolName() {
@@ -53,76 +53,80 @@ export default class DrawBoard extends Component {
     var db_image_upload = uploadImage(
       this.state.username,
       this.state.title,
-      'cont',
-      saveEvent.localFilePath,
+      "cont",
+      saveEvent.localFilePath
     ).then(returned => {
       // console.log('returend' + returned);
       // this.state.glob_url = returned;
-      this.setState({glob_url: returned});
-      this.setState({draw_check: 1});
+      this.setState({ glob_url: returned });
+      this.setState({ draw_check: 1 });
     });
   }
   render() {
-    this.state.title = this.props.navigation.getParam('title');
-    this.state.username = this.props.navigation.getParam('username');
+    this.state.title = this.props.navigation.getParam("title");
+    this.state.username = this.props.navigation.getParam("username");
     return (
-      <View style={{flex: 1, flexDirection: 'column'}}>
+      <View style={{ flex: 1, flexDirection: "column" }}>
         <SketchDraw
-          style={{flex: 1, backgroundColor: 'white'}}
+          style={{ flex: 1, backgroundColor: "white" }}
           ref="sketchRef"
           selectedTool={this.state.toolSelected}
-          toolColor={'#ff0000'}
+          toolColor={"#ff0000"}
           onSaveSketch={this.onSketchSave.bind(this)}
           localSourceImagePath={this.props.localSourceImagePath}
         />
 
-        <View style={{flexDirection: 'row', backgroundColor: '#EEE'}}>
+        <View style={{ flexDirection: "row", backgroundColor: "#EEE" }}>
           <TouchableHighlight
-            underlayColor={'#CCC'}
-            style={{flex: 1, alignItems: 'center', paddingVertical: 20}}
+            underlayColor={"#CCC"}
+            style={{ flex: 1, alignItems: "center", paddingVertical: 20 }}
             onPress={() => {
-              this.props.navigation.navigate('Rich', {
+              this.props.navigation.navigate("Rich", {
                 glob_url: this.state.glob_url,
-                draw_check: this.state.draw_check,
+                draw_check: this.state.draw_check
               });
-            }}>
-            <Text style={{color: '#888', fontWeight: '600'}}>DONE</Text>
+            }}
+          >
+            <Text style={{ color: "#888", fontWeight: "600" }}>DONE</Text>
           </TouchableHighlight>
           <TouchableHighlight
-            underlayColor={'#CCC'}
-            style={{flex: 1, alignItems: 'center', paddingVertical: 20}}
+            underlayColor={"#CCC"}
+            style={{ flex: 1, alignItems: "center", paddingVertical: 20 }}
             onPress={() => {
               this.refs.sketchRef.clearSketch();
-            }}>
-            <Text style={{color: '#888', fontWeight: '600'}}>CLEAR</Text>
+            }}
+          >
+            <Text style={{ color: "#888", fontWeight: "600" }}>CLEAR</Text>
           </TouchableHighlight>
           <TouchableHighlight
-            underlayColor={'#CCC'}
+            underlayColor={"#CCC"}
             style={{
               flex: 1,
-              alignItems: 'center',
+              alignItems: "center",
               paddingVertical: 20,
               borderLeftWidth: 1,
               borderRightWidth: 1,
-              borderColor: '#DDD',
+              borderColor: "#DDD"
             }}
             onPress={() => {
               this.refs.sketchRef.saveSketch();
-            }}>
-            <Text style={{color: '#888', fontWeight: '600'}}>SAVE</Text>
+            }}
+          >
+            <Text style={{ color: "#888", fontWeight: "600" }}>SAVE</Text>
           </TouchableHighlight>
           <TouchableHighlight
-            underlayColor={'#CCC'}
+            underlayColor={"#CCC"}
             style={{
               flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
+              justifyContent: "center",
+              alignItems: "center",
               backgroundColor: this.isEraserToolSelected()
-                ? '#CCC'
-                : 'rgba(0,0,0,0)',
+                ? "#CCC"
+                : "rgba(0,0,0,0)"
             }}
-            onPress={this.toolChangeClick.bind(this)}>
-            <Text style={{color: '#888', fontWeight: '600'}}>ERASER</Text>
+            onPress={this.toolChangeClick.bind(this)}
+          >
+            <Text style={{ color: "#888", fontWeight: "600" }}>ERASER</Text>
           </TouchableHighlight>
         </View>
       </View>
