@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/awais/Documents/4_4_20/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-pt-rBR/values-pt-rBR.xml",
+            "outputFile": "/home/waleed/Desktop/awais_git/StoryTelling-App/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-pt-rBR/values-pt-rBR.xml",
             "map": [
                 {
-                    "source": "/home/awais/.gradle/caches/transforms-2/files-2.1/4e55ec1cf1f14afb170c26ec2eda1099/res/values-pt-rBR/values-pt-rBR.xml",
+                    "source": "/home/waleed/.gradle/caches/transforms-2/files-2.1/8580131c1892b1da86ae92f66d401568/res/values-pt-rBR/values-pt-rBR.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/home/awais/.gradle/caches/transforms-2/files-2.1/213a29c3f8bd70155a3bb3124fbd2d50/res/values-pt-rBR/values-pt-rBR.xml",
+                    "source": "/home/waleed/.gradle/caches/transforms-2/files-2.1/5926ee8625ed1e09431919d5b66df91a/res/values-pt-rBR/values-pt-rBR.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

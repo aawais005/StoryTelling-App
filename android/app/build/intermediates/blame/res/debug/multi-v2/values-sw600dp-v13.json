@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/awais/Documents/4_4_20/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sw600dp-v13/values-sw600dp-v13.xml",
+            "outputFile": "/home/waleed/Desktop/awais_git/StoryTelling-App/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sw600dp-v13/values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "/home/awais/.gradle/caches/transforms-2/files-2.1/4e55ec1cf1f14afb170c26ec2eda1099/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "source": "/home/waleed/.gradle/caches/transforms-2/files-2.1/8580131c1892b1da86ae92f66d401568/res/values-sw600dp-v13/values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
